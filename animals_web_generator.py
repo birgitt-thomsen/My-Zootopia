@@ -12,12 +12,14 @@ def get_animal_data(animals):
     output = ""
     for animal in animals:
         output += '<li class="cards__item">'
-        output += f"Name: {animal['name']}<br/>\n"
-        output += f"Diet: {animal['characteristics']['diet']}<br/>\n"
-        output += f"Location: {", ".join(animal["locations"])}<br/>\n"
+        output += f"<div class='card__title'>{animal['name']}</div>\n"
+        output += '<p class="card__text">'
+        output += f"<strong>Diet:</strong> {animal['characteristics']['diet']}<br/>\n"
+        output += f"<strong>Location:</strong> {", ".join(animal["locations"])}<br/>\n"
         # only set 'type' if it exists
         if "type" in animal["characteristics"]:
-            output += f"Type: {animal["characteristics"]["type"]}<br/>\n"
+            output += f"<strong>Type:</strong> {animal["characteristics"]["type"]}<br/>\n"
+        output += '</p>'
         output += '</li>'
     return output
 
