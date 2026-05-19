@@ -17,11 +17,17 @@ def serialize_animal(animal):
     output += '<li class="cards__item">'
     output += f"<div class='card__title'>{animal['name']}</div>\n"
     output += '<p class="card__text">'
+    output += (f"<strong>Scientific Name:</strong>"
+               f" {animal['taxonomy']['scientific_name']}<br/>\n")
     output += f"<strong>Diet:</strong> {animal['characteristics']['diet']}<br/>\n"
     output += f"<strong>Location:</strong> {", ".join(animal["locations"])}<br/>\n"
     # only set 'type' if it exists
     if "type" in animal["characteristics"]:
         output += f"<strong>Type:</strong> {animal["characteristics"]["type"]}<br/>\n"
+    # only set 'color' if it exists
+    if "color" in animal["characteristics"]:
+        output += (f"<strong>Color:</strong>"
+                   f" {animal['characteristics']['color']}<br/>\n")
     output += '</p>'
     output += '</li>'
     return output
