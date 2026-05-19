@@ -1,4 +1,4 @@
-""" Script to update an html template with serialized animal data. """
+""" Script to update an HTML template with serialized animal data. """
 
 import json
 
@@ -16,19 +16,24 @@ def serialize_animal(animal):
     output = ''
     output += '<li class="cards__item">'
     output += f"<div class='card__title'>{animal['name']}</div>\n"
-    output += '<p class="card__text">'
-    output += (f"<strong>Scientific Name:</strong>"
-               f" {animal['taxonomy']['scientific_name']}<br/>\n")
-    output += f"<strong>Diet:</strong> {animal['characteristics']['diet']}<br/>\n"
-    output += f"<strong>Location:</strong> {", ".join(animal["locations"])}<br/>\n"
+    output += '<div class="card__text">'
+    output += '<ul class="animal_list">'
+    output += (f"<li class='animal_item'><strong>Scientific Name:</strong>"
+               f" {animal['taxonomy']['scientific_name']}</li>\n")
+    output += (f"<li class='animal_item'><strong>Diet:</strong> "
+               f"{animal['characteristics']['diet']}</li>\n")
+    output += (f"<li class='animal_item'><strong>Location:</strong> "
+               f"{", ".join(animal["locations"])}</li>\n")
     # only set 'type' if it exists
     if "type" in animal["characteristics"]:
-        output += f"<strong>Type:</strong> {animal["characteristics"]["type"]}<br/>\n"
+        output += (f"<li class='animal_item'><strong>Type:</strong> "
+                   f"{animal["characteristics"]["type"]}</li>\n")
     # only set 'color' if it exists
     if "color" in animal["characteristics"]:
-        output += (f"<strong>Color:</strong>"
-                   f" {animal['characteristics']['color']}<br/>\n")
-    output += '</p>'
+        output += (f"<li class='animal_item'><strong>Color:</strong>"
+                   f" {animal['characteristics']['color']}</li>\n")
+    output += '</ul>'
+    output += '</div>'
     output += '</li>'
     return output
 
@@ -50,7 +55,6 @@ def load_html_template(file_path):
 def replace_html(html, animals):
     """ Replaces the HTML template with new animals data """
     return html.replace(TARGET_HTML, animals)
-
 
 
 def write_animals_html(file_path, html):
