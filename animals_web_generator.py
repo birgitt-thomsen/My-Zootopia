@@ -11,13 +11,14 @@ animals_data = load_data('animals_data.json')
 def get_animal_data(animals):
     output = ""
     for animal in animals:
-        output += f"Name: {animal['name']}\n"
-        output += f"Diet: {animal['characteristics']['diet']}\n"
-        output += f"Location: {", ".join(animal["locations"])}\n"
+        output += '<li class="cards__item">'
+        output += f"Name: {animal['name']}<br/>\n"
+        output += f"Diet: {animal['characteristics']['diet']}<br/>\n"
+        output += f"Location: {", ".join(animal["locations"])}<br/>\n"
         # only set 'type' if it exists
         if "type" in animal["characteristics"]:
-            output += f"Type: {animal["characteristics"]["type"]}\n"
-        output += "\n"
+            output += f"Type: {animal["characteristics"]["type"]}<br/>\n"
+        output += '</li>'
     return output
 
 animals_output = get_animal_data(animals_data)
